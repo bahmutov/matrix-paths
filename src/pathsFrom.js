@@ -32,7 +32,7 @@ function dfs(grid, x, y, results, current) {
   }
   */
 
-  console.log('visiting', x, y, 'current', current);
+  // console.log('visiting', x, y, 'current', current);
   // console.dir(visited);
 
   // try moving to next position
@@ -49,7 +49,7 @@ function dfs(grid, x, y, results, current) {
   });
 
   if (deadEnd) {
-    console.log('dead end at', x, y, 'current', current);
+    // console.log('dead end at', x, y, 'current', current);
     results.push(current);
   }
 
