@@ -1,5 +1,7 @@
 var check = require('check-types');
+var grid = require('./src/grid');
 
+/*
 function verifyGrid(grid) {
   check.verifyArray(grid, 'expecting an array of arrays');
   var rows = grid.length;
@@ -18,6 +20,7 @@ function inside(grid, row, column) {
   if (column >= grid[row].length) { return false; }
   return true;
 }
+*/
 
 var legalMoves = [
 {x: -1, y: -1},
