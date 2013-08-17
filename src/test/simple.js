@@ -1,4 +1,4 @@
-var paths = require('..').paths;
+var paths = require('../paths').paths;
 
 gt.module('simple paths');
 
