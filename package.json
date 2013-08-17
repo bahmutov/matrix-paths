@@ -1,0 +1,19 @@
+{
+  "name": "matrix-paths",
+  "version": "0.0.0",
+  "description": "Finds all paths in the 2D matrix",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "matrix",
+    "grid",
+    "2d",
+    "paths",
+    "traversal"
+  ],
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "license": "MIT"
+}
