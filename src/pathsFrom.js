@@ -52,6 +52,8 @@ function dfs(grid, x, y, results, current) {
     console.log('dead end at', x, y, 'current', current);
     results.push(current);
   }
+
+  visited[x][y] = false;
 }
 
 /** returns all paths starting from given location */
