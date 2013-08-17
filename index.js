@@ -1,26 +1,7 @@
 var check = require('check-types');
-var grid = require('./src/grid');
 
-/*
-function verifyGrid(grid) {
-  check.verifyArray(grid, 'expecting an array of arrays');
-  var rows = grid.length;
-  grid.forEach(function (row, index) {
-    check.verifyArray(row, 'expected array at ' + index);
-    if (row.length !== rows) {
-      throw new Error('Expected ' + rows + ' columns in row ' + index +
-        ', found ' + row.length);
-    }
-  });
-}
-
-function inside(grid, row, column) {
-  if (row < 0 || column < 0) { return false; }
-  if (row >= grid.length) { return false; }
-  if (column >= grid[row].length) { return false; }
-  return true;
-}
-*/
+var verify = require('./src/grid').verify;
+var inside = require('./src/grid').inside;
 
 var legalMoves = [
 {x: -1, y: -1},
@@ -35,15 +16,24 @@ var legalMoves = [
 {x: 1, y: 1},
 ];
 
+var visited = null;
+
 function dfs(grid, x, y, results, current) {
-  if (grid[x][y].visited) {
+  if (visited[x][y]) {
     throw new Error('already visited grid at ' + x + ',' + y);
   }
   current = current || ''
-  grid[x][y].visited = true;
+  visited[x][y] = true;
   current += grid[x][y];
 
+  /*
+  if (current.length > 3) {
+    return;
+  }
+  */
+
   console.log('visiting', x, y, 'current', current);
+  // console.dir(visited);
 
   // try moving to next position
   var deadEnd = true;
@@ -51,7 +41,7 @@ function dfs(grid, x, y, results, current) {
     var toX = x + move.x;
     var toY = y + move.y;
     if (inside(grid, toX, toY)) {
-      if (haveNotVisited(grid, toX, toY)) {
+      if (!visited[toX][toY]) {
         deadEnd = false;
         dfs(grid, toX, toY, results, current);
       }
@@ -59,18 +49,25 @@ function dfs(grid, x, y, results, current) {
   });
 
   if (deadEnd) {
+    console.log('dead end at', x, y, 'current', current);
     results.push(current);
   }
 }
 
 /** returns all paths starting from given location */
 module.exports.pathsFrom = function (grid, x, y) {
-  verifyGrid(grid);
+  verify(grid);
   if (!inside(grid, x, y)) {
     throw new Error('invalid starting position ' + x + ',' + y);
   }
 
   var results = [];
+  visited = [];
+  visited.length = grid.length;
+  grid.forEach(function (row, index) {
+    visited[index] = [];
+    visited[index].length = row.length;
+  });
   dfs(grid, x, y, results);
 
   return results;
@@ -78,6 +75,6 @@ module.exports.pathsFrom = function (grid, x, y) {
 
 /** returns paths from all starting locations in the grid */
 module.exports.paths = function (grid) {
-  verifyGrid(grid);
+  verify(grid);
   return [];
 };
