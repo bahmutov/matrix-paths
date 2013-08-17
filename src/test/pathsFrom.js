@@ -1,4 +1,4 @@
-var pf = require('..').pathsFrom;
+var pf = require('../pathsFrom').pathsFrom;
 
 gt.module('paths from 1x1');
 
