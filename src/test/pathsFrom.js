@@ -24,11 +24,27 @@ gt.test('cannot start from outside', function () {
 gt.test('1x2', function () {
   var m = [['a', 'b']];
   var paths = pf(m, 0, 0);
+  gt.equal(paths.length, 1);
   gt.equal(paths[0], 'ab');
 });
 
 gt.test('1x2 reverse', function () {
   var m = [['a', 'b']];
   var paths = pf(m, 0, 1);
+  gt.equal(paths.length, 1);
+  gt.equal(paths[0], 'ba');
+});
+
+gt.test('2x1', function () {
+  var m = [['a'], ['b']];
+  var paths = pf(m, 0, 0);
+  gt.equal(paths.length, 1);
+  gt.equal(paths[0], 'ab');
+});
+
+gt.test('2x1 reverse', function () {
+  var m = [['a'], ['b']];
+  var paths = pf(m, 1, 0);
+  gt.equal(paths.length, 1);
   gt.equal(paths[0], 'ba');
 });

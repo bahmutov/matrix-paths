@@ -55,3 +55,11 @@ gt.test('1x1 negative', function () {
   gt.ok(!inside(G, -1, 0));
   gt.ok(!inside(G, -1, -1));
 });
+
+gt.test('2x1 grid', function () {
+  var G = [['a'], ['b']];
+  gt.ok(inside(G, 0, 0));
+  gt.ok(inside(G, 1, 0));
+  gt.ok(!inside(G, 2, 0));
+  gt.ok(!inside(G, 0, 1));
+});
