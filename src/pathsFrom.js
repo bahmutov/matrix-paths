@@ -3,6 +3,11 @@ var check = require('check-types');
 var verify = require('./grid').verify;
 var inside = require('./grid').inside;
 
+var noop = function (path, r, c, grid) {
+  return true;
+};
+var stepWhile = noop;
+
 var legalMoves = null;
 
 var legalMovesWithoutDiagonal = [
@@ -22,10 +27,10 @@ var legalMovesWithDiagonal = legalMovesWithoutDiagonal.concat([
 var visited = null;
 
 function dfs(grid, x, y, results, current) {
+  current = current || '';
   if (visited[x][y]) {
     throw new Error('already visited grid at ' + x + ',' + y);
   }
-  current = current || ''
   visited[x][y] = true;
   current += grid[x][y];
 
@@ -36,8 +41,10 @@ function dfs(grid, x, y, results, current) {
     var toY = y + move.y;
     if (inside(grid, toX, toY)) {
       if (!visited[toX][toY]) {
-        deadEnd = false;
-        dfs(grid, toX, toY, results, current);
+        if (stepWhile(current, toX, toY, grid)) {
+          deadEnd = false;
+          dfs(grid, toX, toY, results, current);
+        }
       }
     }
   });
@@ -59,6 +66,7 @@ module.exports.pathsFrom = function (grid, x, y, opts) {
   opts = opts || {};
   legalMoves = (opts.simple ? legalMovesWithoutDiagonal :
     legalMovesWithDiagonal);
+  stepWhile = opts.stepWhile || noop;
 
   var results = [];
   visited = [];
