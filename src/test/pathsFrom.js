@@ -3,7 +3,7 @@ var pf = require('../pathsFrom').pathsFrom;
 gt.module('paths from 1x1');
 
 gt.test('basics', function () {
-  gt.arity(pf, 3, 'expects 3 arguments');
+  gt.arity(pf, 4, 'expects arguments');
 });
 
 gt.test('1x1', function () {

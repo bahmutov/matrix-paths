@@ -3,18 +3,21 @@ var check = require('check-types');
 var verify = require('./grid').verify;
 var inside = require('./grid').inside;
 
-var legalMoves = [
-{x: -1, y: -1},
-{x: 0, y: -1},
-{x: 1, y: -1},
+var legalMoves = null;
 
+var legalMovesWithoutDiagonal = [
+{x: 0, y: -1},
 {x: -1, y: 0},
 {x: 1, y: 0},
-
-{x: -1, y: 1},
-{x: 0, y: 1},
-{x: 1, y: 1},
+{x: 0, y: 1}
 ];
+
+var legalMovesWithDiagonal = legalMovesWithoutDiagonal.concat([
+{x: -1, y: -1},
+{x: 1, y: -1},
+{x: -1, y: 1},
+{x: 1, y: 1},
+]);
 
 var visited = null;
 
@@ -25,15 +28,6 @@ function dfs(grid, x, y, results, current) {
   current = current || ''
   visited[x][y] = true;
   current += grid[x][y];
-
-  /*
-  if (current.length > 3) {
-    return;
-  }
-  */
-
-  // console.log('visiting', x, y, 'current', current);
-  // console.dir(visited);
 
   // try moving to next position
   var deadEnd = true;
@@ -57,11 +51,14 @@ function dfs(grid, x, y, results, current) {
 }
 
 /** returns all paths starting from given location */
-module.exports.pathsFrom = function (grid, x, y) {
+module.exports.pathsFrom = function (grid, x, y, opts) {
   verify(grid);
   if (!inside(grid, x, y)) {
     throw new Error('invalid starting position ' + x + ',' + y);
   }
+  opts = opts || {};
+  legalMoves = (opts.simple ? legalMovesWithoutDiagonal :
+    legalMovesWithDiagonal);
 
   var results = [];
   visited = [];
