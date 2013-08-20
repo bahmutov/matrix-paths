@@ -1,6 +1,6 @@
 {
   "name": "matrix-paths",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Finds all paths in the 2D matrix",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,7 @@
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "check-types": "~0.6.4",
-    "prefix-dictionary": "0.0.0"
+    "check-types": "~0.6.4"
   },
   "devDependencies": {
     "gt": "~0.8.8"
