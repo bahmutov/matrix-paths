@@ -3,7 +3,7 @@ var paths = require('../paths').paths;
 gt.module('simple paths');
 
 gt.test('basics', function () {
-  gt.arity(paths, 1);
+  gt.arity(paths, 2);
 });
 
 gt.test('1x1', function () {
