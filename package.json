@@ -6,6 +6,7 @@
   "scripts": {
     "test": "gt src/**/test/*.js --output"
   },
+  "pre-commit": "npm test",
   "repository": "https://bitbucket.org/bahmutov/matrix-paths.git",
   "keywords": [
     "matrix",
@@ -20,6 +21,7 @@
     "check-types": "~1.1.1"
   },
   "devDependencies": {
-    "gt": "~0.8.21"
+    "gt": "~0.8.21",
+    "pre-git": "0.0.14"
   }
 }
