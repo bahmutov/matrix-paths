@@ -1,7 +1,7 @@
 var check = require('check-types');
 
 function verify(grid) {
-  check.verifyArray(grid, 'expecting an array of arrays');
+  check.verify.array(grid, 'expecting an array of arrays');
   var rows = grid.length;
   if (rows < 1) {
     throw new Error('invalid number of ros ' + rows);
@@ -9,7 +9,7 @@ function verify(grid) {
 
   var columns = grid[0].length;
   grid.forEach(function (row, index) {
-    check.verifyArray(row, 'expected array at ' + index);
+    check.verify.array(row, 'expected array at ' + index);
     if (row.length !== columns) {
       throw new Error('Expected ' + columns + ' columns in row ' + index +
         ', found ' + row.length);
