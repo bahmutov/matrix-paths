@@ -7,7 +7,11 @@
     "test": "gt src/**/test/*.js --output"
   },
   "pre-commit": "npm test",
-  "repository": "https://bitbucket.org/bahmutov/matrix-paths.git",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bahmutov/matrix-paths.git"
+  },
+  "private": false,
   "keywords": [
     "matrix",
     "grid",
