@@ -40,8 +40,8 @@ function dfs(grid, x, y, results, current) {
     var toX = x + move.x;
     var toY = y + move.y;
     if (inside(grid, toX, toY)) {
-      if (!visited[toX][toY]) {
-        if (stepWhile(current, toX, toY, grid)) {
+      if (stepWhile(current, toX, toY, grid)) {
+        if (!visited[toX][toY]) {
           deadEnd = false;
           dfs(grid, toX, toY, results, current);
         }
